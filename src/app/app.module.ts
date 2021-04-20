@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { MatTableModule } from '@angular/material/table';
-import { CustomerListComponent } from './component/customer-list/customer-list.component';
+import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
 
 @NgModule({
   declarations: [
