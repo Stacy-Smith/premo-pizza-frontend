@@ -12,6 +12,8 @@ import { MatTableModule } from '@angular/material/table';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeUpdateComponent } from './employee/employee-update/employee-update.component';
 import { EmployeeAddComponent } from './employee/employee-add/employee-add.component';
+import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
+import { CustomerAddComponent } from './components/customer/customer-add/customer-add.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { EmployeeAddComponent } from './employee/employee-add/employee-add.compo
     EmployeeComponent,
     EmployeeUpdateComponent,
     EmployeeAddComponent
+    CustomerListComponent,
+    CustomerAddComponent
   ],
   imports: [
     BrowserModule,
