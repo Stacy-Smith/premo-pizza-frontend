@@ -10,11 +10,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { MatTableModule } from '@angular/material/table';
 import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
+import { CustomerAddComponent } from './components/customer/customer-add/customer-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    CustomerAddComponent
   ],
   imports: [
     BrowserModule,
