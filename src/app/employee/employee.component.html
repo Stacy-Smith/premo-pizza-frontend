@@ -1,0 +1,88 @@
+<div class="employee-container">
+    <div class="list row">
+      <div class="col-md-8">
+        <div class="input-group mb-3">
+    
+          <div class="input-group-append">
+            <button
+              class="btn btn btn-info"
+              type="button"
+              (click)="activeEmployees(true)"
+            >
+              Display Active
+            </button>
+            <button
+              class="btn btn btn-info"
+              type="button"
+              (click)="activeEmployees(false)"
+            >
+              Display Inactive
+            </button>
+            <button
+              class="btn btn btn-info"
+              type="button"
+              (click)="refreshList()"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h4>Employees List</h4>
+        <ul class="list-group">
+          <li
+            class="list-group-item"
+            *ngFor="let employee of employees; let i = index"
+            [class.active]="i == currentIndex"
+            (click)="setActiveEmployee(employee, i)"
+          >
+            {{ employee.name }}
+          </li>
+        </ul>
+    
+        <button class="m-3 btn btn-sm btn-primary" routerLink="/employees/add">
+          New Employee
+        </button>
+        <button class="m-3 btn btn-sm btn-danger" (click)="removeAllEmployees()">
+          Remove All
+        </button>
+      </div>
+      <div class="col-md-6">
+        <div *ngIf="currentEmployee">
+          <h4>Employee Details</h4>
+          <div>
+            <label><strong>Name:</strong></label> {{ currentEmployee.name }}
+          </div>
+          <div>
+            <label><strong>Address:</strong></label> {{ currentEmployee.address }}
+          </div>
+          <div>
+            <label><strong>Start Date:</strong></label> {{ currentEmployee.startDate | date}}
+            <br>
+            <label><strong>End Date:</strong></label> {{ currentEmployee.endDate | date}}
+          </div>
+          <div>
+            <label><strong>Tax ID:</strong></label> {{ currentEmployee.taxId }}
+          </div>
+          <div *ngIf="currentEmployee.active">
+            <label><strong>Status: Active</strong></label>
+          </div>
+          <div *ngIf="!currentEmployee.active">
+            <label><strong>Status: Inactive</strong></label>
+          </div>
+          <a class="badge badge-primary" routerLink="/employees/{{ currentEmployee.id }}">
+            Edit
+          </a>
+          <a class="badge badge-primary" routerLink="/employees/orders/{{ currentEmployee.id }}">
+            Orders
+          </a>
+        </div>
+    
+        <div *ngIf="!currentEmployee">
+          <br />
+          <p>Please click on an Employee to see details</p>
+        </div>
+      </div>
+    </div>
+    

@@ -9,10 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { MatTableModule } from '@angular/material/table';
+import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeUpdateComponent } from './employee/employee-update/employee-update.component';
+import { EmployeeAddComponent } from './employee/employee-add/employee-add.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmployeeComponent,
+    EmployeeUpdateComponent,
+    EmployeeAddComponent
   ],
   imports: [
     BrowserModule,
