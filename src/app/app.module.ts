@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { MatTableModule } from '@angular/material/table';
 
-import { ProductComponent } from './component/product/product.component';
+import { ProductComponent } from './components/product/product.component';
 import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
 import { CustomerAddComponent } from './components/customer/customer-add/customer-add.component';
 import { EmployeeComponent } from './components/employee/employee.component';
