@@ -1,1 +1,127 @@
-<p>orders-add works!</p>
+<div class="orders-add-component">
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="col-md-6 form-container">
+            
+        <div class="form-group">
+          <label for="name">Customer</label>
+          <select class="form-control" name="customer" [(ngModel)]="order.customer">
+            <option *ngFor="let customer of customers" [ngValue]="customer" >{{customer.name}}</option>
+         </select>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Employee</label>
+            <select class="form-control" name="employee" [(ngModel)]="order.employee">
+              <option *ngFor="let employee of employees" [ngValue]="employee" >{{employee.name}}</option>
+           </select>
+        </div>   
+
+        <div class="form-group">
+            <label for="timestamp">Order Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="timestamp"
+              [(ngModel)]="order.timestamp"
+              name="timestamp"
+            />
+        </div>
+
+          <div class="form-group">
+            <label for="subtotal">Subtotal</label>
+            <input
+              type="text"
+              class="form-control"
+              id="subtotal"
+              [(ngModel)]="order.subtotal"
+              name="subtotal"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="discount">Discount</label>
+            <input
+              type="text"
+              class="form-control"
+              id="discount"
+              [(ngModel)]="order.discount"
+              name="discount"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="total">Total</label>
+            <input
+              type="text"
+              class="form-control"
+              id="total"
+              [(ngModel)]="order.total"
+              name="total"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 calc-container">
+          <div class="calculator" style="background-color: white;">
+
+            <input type="text" class="calculator-screen" [value]="currentNumber" disabled />
+          
+            <div class="calculator-keys">
+          
+              <button type="button" routerLink="/employees/add"  class="admin" value="employee-login">Add Employee</button>
+              <button type="button" routerLink="/customers/add"  class="admin" value="add-customer">Add Customer</button>
+              <button type="button" routerLink="/products" class="admin" value="see-full-menu">See Full Menu</button>
+              <button type="button" routerLink="/orders"  class="admin" value="edit-order">All Orders</button>
+
+              <button *ngFor="let product of products" type="button" (click) = "getProduct(product)" class="product" value="product.price">{{product.item}}</button>
+          
+              <!-- <button type="button" (click) = "getNumber('7.35')" class="product" value="7.35">Pizza (S) Pepperoni</button>
+              <button type="button" (click) = "getNumber('9.35')" class="product" value="9.35">Pizza (M) Pepperoni</button>
+              <button type="button" (click) = "getNumber('14.00')" class="product" value="14.00">Pizza (L) Pepperoni</button>
+              <button type="button" (click) = "getNumber('3.25')" class="product" value="3.25">Soda</button>
+        
+          
+              <button type="button" (click) = "getNumber('8.50')" class="product" value="8.50">Pizza (S) House Special</button>
+              <button type="button" (click) = "getNumber('10.50')" class="product" value="10.50">Pizza (M) House Special</button>
+              <button type="button" (click) = "getNumber('16.00')" class="product" value="16.00">Pizza (L) House Special</button>
+              <button type="button" (click) = "getNumber('2.50')" class="product" value="2.50">Breadsticks</button> -->
+        
+          
+              <button type="button" (click) = "getOperation('+')" class="operator" value="+">+</button>
+              <button type="button" (click) = "getOperation('-')" class="operator" value="-">-</button>
+              <button type="button" (click) = "getOperation('*')" class="operator" value="*">&times;</button>
+              <button type="button" (click) = "getOperation('/')" class="operator" value="/">&divide;</button>
+          
+              <button type="button" (click) = "getNumber('7')" value="7">7</button>
+              <button type="button" (click) = "getNumber('8')" value="8">8</button>
+              <button type="button" (click) = "getNumber('9')" value="9">9</button>
+          
+              <button type="button" (click) = "getNumber('4')" value="4">4</button>
+              <button type="button" (click) = "getNumber('5')" value="5">5</button>
+              <button type="button" (click) = "getNumber('6')" value="6">6</button>
+          
+              <button type="button" (click) = "getNumber('1')" value="1">1</button>
+              <button type="button" (click) = "getNumber('2')" value="2">2</button>
+              <button type="button" (click) = "getNumber('3')" value="3">3</button>
+          
+              <button type="button" (click) = "getNumber('0')" value="0">0</button>
+              <button type="button" (click) = "getDecimal()" class="decimal" value=".">.</button>
+              <button type="button" (click) = "clear()"  class="all-clear" value="all-clear">AC</button>
+          
+              <button type="button" (click) = "getOperation('=')" class="equal-sign" value="=">=</button>
+          
+            </div>
+          </div>        
+        </div>
+
+        <div>
+        <button (click)="saveOrder()" class="btn btn-info">Submit</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>You submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newOrder()">Add</button>
+        <button class="btn btn-success" routerLink="/orders">All Orders</button>
+      </div>
+    </div>
+  </div>
