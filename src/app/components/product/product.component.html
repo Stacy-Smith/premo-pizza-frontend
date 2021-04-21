@@ -17,11 +17,8 @@
                     <tr *ngFor="let product of products">
                         <td>{{product.item}}</td>
                         <td>{{product.details}}</td>
-                        
-                        <td style="text-align: center;">{{product.price}}</td>
+                        <td style="text-align: center;">${{product.price | number: '1.2-2'}}</td>
                     </tr>
-                    
-                     
                 </tbody>
 
             </table>
