@@ -23,7 +23,7 @@
               type="button"
               (click)="refreshList()"
             >
-              Clear
+              Display All
             </button>
           </div>
         </div>
@@ -44,9 +44,7 @@
         <button class="m-3 btn btn-sm btn-primary" routerLink="/employees/add">
           New Employee
         </button>
-        <button class="m-3 btn btn-sm btn-danger" (click)="removeAllEmployees()">
-          Remove All
-        </button>
+
       </div>
       <div class="col-md-6">
         <div *ngIf="currentEmployee">
