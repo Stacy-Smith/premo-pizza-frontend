@@ -13,10 +13,11 @@ import { MatTableModule } from '@angular/material/table';
 import { ProductComponent } from './components/product/product.component';
 import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
 import { CustomerAddComponent } from './components/customer/customer-add/customer-add.component';
+import { CustomerEditComponent } from './components/customer/customer-edit/customer-edit.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeAddComponent } from './components/employee/employee-add/employee-add.component';
 import { EmployeeUpdateComponent } from './components/employee/employee-update/employee-update.component';
-import { CustomerEditComponent } from './components/customer/customer-edit/customer-edit.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CustomerEditComponent } from './components/customer/customer-edit/custo
     EmployeeAddComponent,
     CustomerListComponent,
     CustomerAddComponent,
-    CustomerEditComponent
+    CustomerEditComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

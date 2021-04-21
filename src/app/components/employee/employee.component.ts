@@ -74,8 +74,6 @@ export class EmployeeComponent implements OnInit {
           console.log(error);
         });
     }
-    console.log(this.employees)
-    console.log(`Active ${active}`)
   }
 
 }

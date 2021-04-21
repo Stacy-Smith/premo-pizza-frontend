@@ -88,9 +88,13 @@
         Delete
       </button>
 
+      <button class="badge badge-secondary mr-2" style="margin: 7px;" routerLink="/employees">
+        Employee Home
+      </button>
+
       <p>{{ message }}</p>
     </div>
-  
+
     <div *ngIf="!currentEmployee">
       <br />
       <p>Cannot access this Employee...</p>

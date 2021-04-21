@@ -69,7 +69,6 @@ export class EmployeeUpdateComponent implements OnInit {
     this.employeeService.delete(this.currentEmployee.id)
       .subscribe(response => {
         console.log(response);
-        this.message = 'This employee has been deleted';
         this.router.navigate(['/employees']);
       },
       error => {

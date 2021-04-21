@@ -1,0 +1,112 @@
+<div class="orders-container" >
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h2>All Orders</h2>
+            </mat-card-title>
+        </mat-card-header>
+        <br>
+        <br>
+        <h4>Filter Orders</h4>
+        <form>
+            <div class="zip-container">
+            <mat-form-field appearance="fill">
+                <mat-label>Filter By Zip</mat-label>
+                <mat-select (selectionChange)="saveZipCode($event)" [value]="zipCode">
+                    <mat-option *ngFor="let zip of zips" [value]="zip">
+                        {{zip}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div>
+        <div class="date-container">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input (dateInput)="saveStartDate($event)" matStartDate placeholder="Start date" [value]="startDate">
+              <input (dateInput)="saveEndDate($event)" matEndDate placeholder="End date" [value]="endDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+        <div class="button-container">
+            <button mat-raised-button color="primary" class="primary" (click)="applyFilter()">Submit</button>
+            <button mat-raised-button color="basic" class="primary" (click)="clearFilter()">Clear</button>
+        </div>
+        </form>
+        <mat-card-content>
+            <div class="mat-elevation-z8">
+            
+                <table mat-table [dataSource]="dataSource" matSort>
+            
+                    <ng-container matColumnDef="orderId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Order ID </th>
+                        <td mat-cell *matCellDef="let order">{{order.orderId}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="customer">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer </th>
+                        <td mat-cell *matCellDef="let order">{{order.customer.name}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="employee">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee </th>
+                        <td mat-cell *matCellDef="let order">{{order.employee.name}}</td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                        <td mat-cell *matCellDef="let order">{{order.timestamp | date: 'yyyy-MM-dd'}}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="zipCode">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Zipcode </th>
+                        <td mat-cell *matCellDef="let order"> {{order.customer['zipCode']}} </td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="subtotal">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Subtotal </th>
+                        <td mat-cell *matCellDef="let order"> ${{order.subtotal | number: '1.2-2'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="discount">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
+                        <td mat-cell *matCellDef="let order"> ${{order.discount | number: '1.2-2'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="total">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                        <td mat-cell *matCellDef="let order"> ${{order.total | number: '1.2-2'}} </td>
+                    </ng-container>
+            
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    
+                </table>
+                <br>
+                <table class="totals">
+                    <thead>
+                        <tr>
+                            <th class="crazy"></th>
+                            <th class="crazy"></th>
+                            <th class="crazy"></th>
+                            <th class="crazy"></th>
+                            <th class="crazy"></th>
+                            <th class="crazy"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td colspan="2"></td>
+                            <td colspan="1"><pre style=" font-size:14px; font-family:Roboto, 'Helvetica Neue', sans-serif;">Total:       ${{ordersTotal | number: '1.2-2'}}  </pre></td>
+                        </tr>
+                    </tbody>
+                </table>
+            
+                <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20, dataSource.data.length]" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
