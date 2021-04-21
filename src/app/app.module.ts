@@ -9,8 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { MatTableModule } from '@angular/material/table';
+
+import { ProductComponent } from './components/product/product.component';
 import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
 import { CustomerAddComponent } from './components/customer/customer-add/customer-add.component';
+import { CustomerEditComponent } from './components/customer/customer-edit/customer-edit.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeAddComponent } from './components/employee/employee-add/employee-add.component';
 import { EmployeeUpdateComponent } from './components/employee/employee-update/employee-update.component';
@@ -19,11 +22,13 @@ import { OrdersComponent } from './components/orders/orders.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ProductComponent,
     EmployeeComponent,
     EmployeeUpdateComponent,
     EmployeeAddComponent,
     CustomerListComponent,
     CustomerAddComponent,
+    CustomerEditComponent,
     OrdersComponent
   ],
   imports: [
