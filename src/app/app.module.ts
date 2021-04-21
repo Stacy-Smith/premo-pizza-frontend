@@ -18,6 +18,7 @@ import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeAddComponent } from './components/employee/employee-add/employee-add.component';
 import { EmployeeUpdateComponent } from './components/employee/employee-update/employee-update.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { OrdersComponent } from './components/orders/orders.component';
     CustomerListComponent,
     CustomerAddComponent,
     CustomerEditComponent,
-    OrdersComponent
+    OrdersComponent,
+    OrdersAddComponent
   ],
   imports: [
     BrowserModule,

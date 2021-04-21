@@ -1,7 +1,10 @@
+import { Customer } from "./customer";
+import { Employee } from "./employee";
+
 export class Order {
     orderId?: number;
-    customer: object;
-    employee: object;
+    customer: Customer;
+    employee: Employee;
     timestamp: Date;
     subtotal: number;
     discount: number;

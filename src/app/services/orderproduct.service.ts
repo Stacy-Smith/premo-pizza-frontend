@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const baseURL = 'http://localhost:8080/api/orders';
+const baseURL = 'http://localhost:8080/api/orderproducts';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService {
+export class OrderproductService {
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +23,7 @@ export class OrderService {
     return this.http.post(baseURL, data);
   }
 
-  update(id, data): Observable<any> {
+  update(id,data): Observable<any> {
     return this.http.put(`${baseURL}/${id}`, data);
   }
 
@@ -32,7 +32,6 @@ export class OrderService {
   }
 
   deleteAll(): Observable<any> {
-    return this.http.delete(baseURL);
+    return this.delete(baseURL);
   }
-
 }
