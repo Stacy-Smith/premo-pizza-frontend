@@ -1,0 +1,32 @@
+<div class="product-container">
+    <br>
+    <div class="row">
+        <div class="container">
+            <p style="text-align: center; font-size: 50px; padding: none; height: 50px;">Products</p>
+            <br>
+            <table class="table table-bordered">
+                <thead style="text-align: center;">
+                    <tr style="font-size: xx-large;">
+                        <th>Item</th>
+                        <th>Details</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+
+                <tbody style="font-size: xx-large;">
+                    <tr *ngFor="let product of products">
+                        <td>{{product.item}}</td>
+                        <td>{{product.details}}</td>
+                        
+                        <td style="text-align: center;">{{product.price}}</td>
+                    </tr>
+                    
+                     
+                </tbody>
+
+            </table>
+            <hr>
+            <button type="button" routerLink="/orders/add" class="button" style="margin: 15px;">Order Screen</button>
+        </div>
+    </div>
+</div> 

@@ -9,10 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { MatTableModule } from '@angular/material/table';
+import { ProductComponent } from './component/product/product.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductComponent
+   
   ],
   imports: [
     BrowserModule,
