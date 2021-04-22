@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { concat, forkJoin } from 'rxjs';
 import { Customer } from 'src/app/models/customer';
 import { Employee } from 'src/app/models/employee';
 import { OrderProduct } from 'src/app/models/orderproduct';
@@ -21,7 +22,38 @@ export class OrdersAddComponent implements OnInit {
   customers: Customer[] = [];
   products: Product[] = [];
   orderProducts: OrderProduct[] = [];
-  order: Order = null;
+  order: Order = {
+    customer: {
+      id: null,
+      name: null,
+      address: null,
+      phoneNumber: null,
+      zipCode: null
+    },
+    employee: {
+      employeeId: null,
+      name: null,
+      address: null,
+      startDate: null,
+      endDate: null,
+      taxId: null,
+      active: false
+    },
+    timestamp: new Date,
+    subtotal: 0.00,
+    discount: 0.00,
+    total: 0.00
+  };
+  submitted = false;
+
+  selectedProduct: Product = null;
+  firstProduct: Product = null;
+  currentNumber = '0';
+  productMult = 0;
+  firstOperand = null;
+  operator = null;
+  quantity = 1;
+  waitForSecondNumber = false;
 
   constructor(private employeeService: EmployeeService,
               private customerService: CustomerService,
@@ -71,4 +103,170 @@ export class OrdersAddComponent implements OnInit {
       });
   }
 
+  saveOrder(): void {
+    console.log(this.order);
+    console.log(this.orderProducts);
+    // send create for order object
+    this.orderService.create(this.order)
+    // subscribe -> assign orderid to all orderproducts
+      .subscribe(data => {
+        this.order = data;
+        let multiCreate = [];
+        // make creates for each orderproduct
+        this.orderProducts.forEach(orderProduct => {
+          orderProduct.order = this.order;
+          multiCreate.push(this.orderProductService.create(orderProduct));
+        })
+         // send them together in concat
+        forkJoin(multiCreate).subscribe(data => {
+          console.log(data);
+        }, error => {
+          console.log(error);
+        })
+      })
+  }
+
+  public getProduct(product: Product){
+    if(this.waitForSecondNumber)
+    {
+      this.currentNumber = String(product.price);
+      this.waitForSecondNumber = false;
+    }else{
+      this.currentNumber === '0'? this.currentNumber = String(product.price): this.currentNumber += String(product.price);
+    }
+    this.selectedProduct = product;
+  }
+
+  public getNumber(v: string){
+    console.log(v);
+    if(this.waitForSecondNumber)
+    {
+      this.currentNumber = v;
+      this.waitForSecondNumber = false;
+    }else{
+      this.currentNumber === '0'? this.currentNumber = v: this.currentNumber += v;
+    }
+  }
+
+  getDecimal(){
+    if(!this.currentNumber.includes('.')){
+        this.currentNumber += '.'; 
+    }
+  }
+
+  public getOperation(op: string){
+    console.log(op);
+    this.firstProduct = this.selectedProduct;
+    if(op == "+" && this.operator == null){
+      let orderProduct: OrderProduct = {
+        product: this.selectedProduct,
+        order: null,
+        quantity: 1
+      }
+      this.orderProducts.push(orderProduct);
+    }
+    if(this.firstOperand === null){
+      this.firstOperand = Number(this.currentNumber);
+    }else if(this.operator){
+      const result = this.doCalculation(this.operator , Number(this.currentNumber))
+      this.currentNumber = String(result);
+      this.firstOperand = result;
+    }
+    this.operator = op;
+    this.waitForSecondNumber = true;
+  }
+
+  private doCalculation(op , secondOp){
+    let included = false;
+    switch (op){
+      case '+':
+        // check if product is there, if yes += qty 1
+        this.orderProducts.forEach(orderProduct => {
+          if(orderProduct.product.productId == this.firstProduct.productId){
+            orderProduct.quantity += 1;
+            included = true;
+          }
+        });
+
+      if(!included){
+        let orderProduct: OrderProduct = {
+          product: this.selectedProduct,
+          order: null,
+          quantity: 1
+        }
+        this.orderProducts.push(orderProduct);
+      }
+      // check if product is there, if yes += qty
+      console.log(`First Product: ${JSON.stringify(this.firstProduct)}`);
+      console.log(`Order Products Array: ${JSON.stringify(this.orderProducts)}`);
+        return this.firstOperand += secondOp; 
+      case '-': 
+      // remove item
+      return this.firstOperand -= secondOp; 
+      case '*': 
+      // check if product is there, if yes += qty
+        this.orderProducts.forEach(orderProduct => {
+          if(orderProduct.product.productId == this.firstProduct.productId){
+            orderProduct.quantity += Number(this.currentNumber);
+            included = true;
+          }
+        });
+        // get quantity & push new orderproduct
+        if(!included){
+          let orderProduct: OrderProduct = {
+            product: this.selectedProduct,
+            order: null,
+            quantity: Number(this.currentNumber)
+          }
+          this.orderProducts.push(orderProduct);
+        }
+        console.log(`First Product: ${JSON.stringify(this.firstProduct)}`);
+        console.log(`Order Products Array: ${JSON.stringify(this.orderProducts)}`);
+        this.productMult = this.selectedProduct.price * secondOp;
+      return this.currentNumber; 
+      case '/': 
+      //discount
+      return this.firstOperand /= secondOp; 
+      case '=':
+        //update totals
+        console.log(`First Product: ${JSON.stringify(this.firstProduct)}`);
+        console.log(`Order Products Array: ${JSON.stringify(this.orderProducts)}`);
+      return secondOp;
+    }
+    //update total
+    console.log(`First Product: ${JSON.stringify(this.firstProduct)}`);
+    console.log(`Order Products Array: ${JSON.stringify(this.orderProducts)}`);
+  }
+
+  public clear(){
+    this.selectedProduct = null;
+    this.currentNumber = '0';
+    this.firstOperand = null;
+    this.operator = null;
+    this.quantity = 1;
+    this.waitForSecondNumber = false;
+    this.orderProducts = [];
+    this.order = {
+        customer: {
+      id: null,
+      name: null,
+      address: null,
+      phoneNumber: null,
+      zipCode: null
+    },
+      employee: {
+      employeeId: null,
+      name: null,
+      address: null,
+      startDate: null,
+      endDate: null,
+      taxId: null,
+      active: false
+    },
+    timestamp: new Date,
+    subtotal: 0.00,
+    discount: 0.00,
+    total: 0.00
+  };
+  }
 }
