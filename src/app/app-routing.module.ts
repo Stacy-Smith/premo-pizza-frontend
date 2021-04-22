@@ -11,6 +11,7 @@ import { OrderDetailComponent } from './components/orders/order-detail/order-det
 import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ProductComponent } from './components/product/product.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 const routes: Routes = [
   // Customer Routes
@@ -29,7 +30,10 @@ const routes: Routes = [
   { path: 'orders/:id', component: OrderDetailComponent},
 
   // Product routes
-  { path: 'products', component: ProductComponent }
+  { path: 'products', component: ProductComponent },
+
+  //Reports routes
+  { path: 'reports', component: ReportsComponent }
 ];
 
 @NgModule({

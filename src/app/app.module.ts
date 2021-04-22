@@ -20,6 +20,7 @@ import { EmployeeUpdateComponent } from './components/employee/employee-update/e
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
 import { OrderDetailComponent } from './components/orders/order-detail/order-detail.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { OrderDetailComponent } from './components/orders/order-detail/order-det
     CustomerEditComponent,
     OrdersComponent,
     OrdersAddComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

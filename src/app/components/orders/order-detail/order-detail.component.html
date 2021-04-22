@@ -1,1 +1,29 @@
-<p>order-detail works!</p>
+<h2>Details for Order {{order.orderId}}</h2>
+
+<ul>
+    <li>Order ID: {{order.orderId}}</li>
+    <li>Customer: {{order.customer.name}}</li>
+    <li>Employee: {{order.employee.name}}</li>
+    <li>Date: {{order.timestamp | date}}</li>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Details</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let orderProd of orderProducts">
+                <td>{{orderProd.product.item}}</td>
+                <td>{{orderProd.product.details}}</td>
+                <td>${{orderProd.product.price | number: '1.2-2'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <li>Subtotal: ${{order.subtotal | number: '1.2-2'}}</li>
+    <li>Discount: ${{order.discount | number: '1.2-2'}}</li>
+    <li>Total: ${{order.total | number: '1.2-2'}}</li>
+</ul>
