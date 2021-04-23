@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
 import { Employee } from 'src/app/models/employee';
 import { Order } from 'src/app/models/orders';
 import { Product } from 'src/app/models/product';
@@ -21,8 +19,8 @@ export class ReportsComponent implements OnInit {
   employeeSalesData = [];
 
   // Zip Code Chart data
-  zipcodeSalesData = [{name: 55501, value: 0}, {name: 55502, value: 0}, 
-                      {name: 55503, value: 0}, {name: 55504, value: 0}];
+  zipcodeSalesData = [{name: '55501', value: 0}, {name: '55502', value: 0}, 
+                      {name: '55503', value: 0}, {name: '55504', value: 0}];
 
   // Monthly chart data
   months = ['January', 'February', 'March', 'April', 'May', 'June', 
@@ -68,7 +66,7 @@ export class ReportsComponent implements OnInit {
   getZipcodeSalesData(){
     this.zipcodeSalesData.forEach(data => {
       this.orders.forEach(order => {
-        if(data.name == order.customer.zipCode){
+        if(Number(data.name) == order.customer.zipCode){
           data.value += order.total;
         }
       })
@@ -84,5 +82,4 @@ export class ReportsComponent implements OnInit {
       this.monthlySalesData[date.getMonth()].value += order.total;
     })
   }
-
 }
