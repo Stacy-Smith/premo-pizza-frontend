@@ -1,6 +1,6 @@
 export class Product {
 productId? : number;
-item : String;
+item : string;
 details : String;
 price : number; 
 
