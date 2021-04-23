@@ -21,17 +21,13 @@ export class ReportsComponent implements OnInit {
   employeeSalesData = [];
 
   // Zip Code Chart data
-  barChartLabelsZipcode: Label[] = ['55501', '55502', '55503', '55504'];
-  barChartDataZipcode: ChartDataSets[] = [{ data: [], label: 'YTD Sales by Zipcode' }];
+  zipcodeSalesData = [{name: 55501, value: 0}, {name: 55502, value: 0}, 
+                      {name: 55503, value: 0}, {name: 55504, value: 0}];
 
   // Monthly chart data
-  barChartLabelsMonthly: Label[] = ['January', 'February', 'March', 'April', 'May', 
-                                    'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  barChartDataMonthly: ChartDataSets[] = [{ data: [], label: 'YTD Sales by Month' }];
-
-  // Product chart data
-  barChartLabelsProduct: Label[] = [];
-  barChartDataProduct: ChartDataSets[] = [{ data: [], label: 'YTD Sales by Product' }];
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 
+            'July', 'August', 'September', 'October', 'November', 'December'];
+  monthlySalesData = [];
 
   constructor(private activatedRoute: ActivatedRoute) {
                 this.activatedRoute.data.subscribe(data => {
@@ -43,6 +39,8 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployeeSalesData();
+    this.getZipcodeSalesData();
+    this.getMonthlySalesData();
   }
 
   getEmployeeSalesData(): void {
@@ -67,9 +65,23 @@ export class ReportsComponent implements OnInit {
     })
   }
 
-  getProductChartLabels(): void {
-    this.products.forEach(product => {
-      this.barChartLabelsProduct.push(product.item);
+  getZipcodeSalesData(){
+    this.zipcodeSalesData.forEach(data => {
+      this.orders.forEach(order => {
+        if(data.name == order.customer.zipCode){
+          data.value += order.total;
+        }
+      })
+    })
+  }
+
+  getMonthlySalesData() {
+    this.months.forEach(month => {
+      this.monthlySalesData.push({name: month, value: 0})
+    })
+    this.orders.forEach(order => {
+      let date = new Date(order.timestamp);
+      this.monthlySalesData[date.getMonth()].value += order.total;
     })
   }
 
