@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from 'src/app/models/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 
@@ -14,7 +15,9 @@ export class CustomerListComponent implements OnInit {
   currentIndex = -1;
   active = null;
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.retrieveCustomers();
@@ -39,6 +42,18 @@ export class CustomerListComponent implements OnInit {
   setActiveCustomer(customer, index): void {
     this.currentCustomer = customer;
     this.currentIndex = index;
+  }
+
+  deleteCustomer(): void {
+    this.customerService.delete(this.currentCustomer.id)
+      .subscribe(
+        response => {
+          console.log(response);
+          window.location.reload();
+        },
+        error => {
+          console.log(error);
+        });
   }
   
 }
