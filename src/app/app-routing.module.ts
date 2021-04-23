@@ -5,6 +5,7 @@ import { CustomerAddComponent } from './components/customer/customer-add/custome
 import { CustomerEditComponent } from './components/customer/customer-edit/customer-edit.component';
 import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
 import { EmployeeAddComponent } from './components/employee/employee-add/employee-add.component';
+import { EmployeeOrdersComponent } from './components/employee/employee-orders/employee-orders.component';
 import { EmployeeUpdateComponent } from './components/employee/employee-update/employee-update.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { OrderDetailComponent } from './components/orders/order-detail/order-detail.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   // Employee Routes
   { path: 'employees', component: EmployeeComponent },
   { path: 'employees/add', component: EmployeeAddComponent },
+  { path: 'employees/orders/:id', component: EmployeeOrdersComponent },
   { path: 'employees/:id', component: EmployeeUpdateComponent},
 
   // Orders Routes
