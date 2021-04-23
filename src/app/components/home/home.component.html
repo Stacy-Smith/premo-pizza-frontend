@@ -1,0 +1,115 @@
+<div class="main-container">
+    <div class="nav-container" style="background-color: rgba(0, 0, 0, 0.623);">
+        <div style="text-align: center;">
+            <a class="navbar-brand" style="color: white;">Welcome to Premo Pizza</a>
+        </div>
+        <div style="padding-bottom: 15px;">
+            <button class="product-button" type="button" routerLink="products">Menu</button>
+        </div>
+    </div>
+<ngb-carousel class="carousel-container"
+        [showNavigationArrows]="true" 
+        [showNavigationIndicators]="true"
+        interval="2500"
+        [keyboard]="true"
+        [pauseOnHover]="true"
+        [wrap]="true"
+        [activeId]="'sliderOne'">
+
+        <ng-template ngbSlide id="sliderOne">
+            <div class="picsum-img-wrapper">
+                <figure>
+                    <img src="assets/2.jpg" alt="Soda" >
+                    <figcaption>
+                        <h2>Soda</h2>
+                        <p>2 Liter Bottle</p>
+                    </figcaption>
+                </figure>
+            </div>
+        </ng-template>
+
+        <ng-template ngbSlide id="sliderTwo">
+        <div class="picsum-img-wrapper">
+            <figure>
+                <img src="assets/3.jpg" alt="Breadsticks" >
+                <figcaption>
+                    <h2>Breadsticks</h2>
+                    <p>8 per pack</p>
+                </figcaption>
+            </figure>
+        </div>
+    </ng-template>
+    <ng-template ngbSlide id="sliderThree">
+        <div class="picsum-img-wrapper">
+            <figure>
+                <img src="assets/4.jpg" alt="Small Pepperoni Pizza" >
+                <figcaption>
+                    <h2>Small Pepperoni Pizza</h2>
+                    <p>8 inch</p>
+                </figcaption>
+            </figure>
+        </div>
+    </ng-template>
+    <ng-template ngbSlide id="sliderFour">
+        <div class="picsum-img-wrapper">
+            <figure>
+                <img src="assets/5.jpg" alt="Medium Pepperoni Pizza" >
+                <figcaption>
+                    <h2>Medium Pepperoni Pizza</h2>
+                    <p>12 inch</p>
+                </figcaption>
+            </figure>            
+        </div>
+    </ng-template>
+
+    <ng-template ngbSlide id="sliderFive">
+        <div class="picsum-img-wrapper">
+            <figure>
+                <img src="assets/6.jpg" alt="Large Pepperoni Pizza" >
+                <figcaption>
+                    <h2>Large Pepperoni Pizza</h2>
+                    <p>18 inch</p>
+                </figcaption>
+            </figure>
+        </div>
+    </ng-template>
+
+    <ng-template ngbSlide id="sliderSix">
+        <div class="picsum-img-wrapper">
+            <figure>
+                <img src="assets/7.jpg" alt="Small House Special Pizza" >
+                <figcaption>
+                    <h2>Small House Special Pizza</h2>
+                    <p>8 inch</p>
+                </figcaption>
+            </figure>
+        </div>
+    </ng-template>
+
+    <ng-template ngbSlide id="sliderSeven">
+        <div class="picsum-img-wrapper">
+            <figure>
+                <img src="assets/8.jpg" alt="Medium House Special Pizza" >
+                <figcaption>
+                    <h2>Medium House Special Pizza</h2>
+                    <p>12 inch</p>
+                </figcaption>
+            </figure>
+        </div>
+    </ng-template>
+
+    <ng-template ngbSlide id="sliderEight">
+        <div class="picsum-img-wrapper">
+            <figure>
+                <img src="assets/9.jpg" alt="Large House Special Pizza" >
+                <figcaption>
+                    <h2>Large House Special Pizza</h2>
+                    <p>18 inch</p>
+                </figcaption>
+            </figure>           
+        </div>
+    </ng-template>
+
+</ngb-carousel>
+
+</div>

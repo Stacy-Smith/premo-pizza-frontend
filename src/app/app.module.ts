@@ -23,6 +23,8 @@ import { OrdersAddComponent } from './components/orders/orders-add/orders-add.co
 import { OrderDetailComponent } from './components/orders/order-detail/order-detail.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { EmployeeOrdersComponent } from './components/employee/employee-orders/employee-orders.component';
+import { HomeComponent } from './components/home/home.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { EmployeeOrdersComponent } from './components/employee/employee-orders/e
     OrdersAddComponent,
     OrderDetailComponent,
     ReportsComponent,
-    EmployeeOrdersComponent
+    EmployeeOrdersComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { EmployeeOrdersComponent } from './components/employee/employee-orders/e
     MaterialModule,
     FormsModule,
     MatTableModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
