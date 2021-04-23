@@ -124,6 +124,7 @@ export class OrdersAddComponent implements OnInit {
           console.log(error);
         })
       })
+      this.submitted = true;
   }
 
   public getProduct(product: Product){

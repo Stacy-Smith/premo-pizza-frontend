@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
 import { Employee } from 'src/app/models/employee';
 import { Order } from 'src/app/models/orders';
 import { Product } from 'src/app/models/product';
@@ -84,5 +82,4 @@ export class ReportsComponent implements OnInit {
       this.monthlySalesData[date.getMonth()].value += order.total;
     })
   }
-
 }
