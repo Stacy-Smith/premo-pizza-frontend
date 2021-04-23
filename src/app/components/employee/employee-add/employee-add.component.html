@@ -67,7 +67,8 @@
             </select>
           </div>
   
-        <button (click)="saveEmployee()" class="btn btn-info">Submit</button>
+        <button (click)="saveEmployee()" class="btn btn-info" style="margin-right:15px;">Submit</button>
+        <button routerLink="/employees" class="btn btn-info" style="background-color: grey;">Back</button>
       </div>
   
       <div *ngIf="submitted">
