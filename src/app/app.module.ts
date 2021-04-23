@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { MatTableModule } from '@angular/material/table';
+import { NgxChartsModule }from '@swimlane/ngx-charts';
 
 import { ProductComponent } from './components/product/product.component';
 import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
@@ -20,6 +21,8 @@ import { EmployeeUpdateComponent } from './components/employee/employee-update/e
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
 import { OrderDetailComponent } from './components/orders/order-detail/order-detail.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { EmployeeOrdersComponent } from './components/employee/employee-orders/employee-orders.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { OrderDetailComponent } from './components/orders/order-detail/order-det
     CustomerEditComponent,
     OrdersComponent,
     OrdersAddComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    ReportsComponent,
+    EmployeeOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ import { OrderDetailComponent } from './components/orders/order-detail/order-det
     ReactiveFormsModule,
     MaterialModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

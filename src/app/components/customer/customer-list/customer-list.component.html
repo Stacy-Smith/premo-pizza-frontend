@@ -26,9 +26,9 @@
         <!-- <button class="m-3 btn btn-sm btn-info" routerLink="/orders/add">
           New Order
         </button> -->
-        <!-- <button class="m-3 btn btn-sm btn-danger" >
+        <button type="submit" class="m-3 btn btn-sm btn-danger" (click)="deleteCustomer()">
           Delete
-        </button> -->
+        </button>
       </div>
       <div class="col-md-6">
         <div *ngIf="currentCustomer">
@@ -52,7 +52,7 @@
     
         <div *ngIf="!currentCustomer">
           <br />
-          <p>Please click on an Customer to see details</p>
+          <p>Please click on a Customer to see details</p>
         </div>
       </div>
     </div>

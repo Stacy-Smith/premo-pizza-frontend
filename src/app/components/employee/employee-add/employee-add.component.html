@@ -67,13 +67,17 @@
             </select>
           </div>
   
-        <button (click)="saveEmployee()" class="btn btn-info">Submit</button>
+        <button (click)="saveEmployee()" class="btn btn-info" style="margin-right:15px;">Submit</button>
+        <button routerLink="/employees" class="btn btn-info" style="background-color: grey;">Back</button>
       </div>
   
       <div *ngIf="submitted">
         <h4>You submitted successfully!</h4>
         <button class="btn btn-success" (click)="newEmployee()" style="margin-right: 10px;">Add</button>
         <button class="btn btn-success" routerLink="/employees">Employee Home</button>
+        <button class="m-3 btn btn-sm btn-info" routerLink="/orders/add">
+          New Order
+        </button>
       </div>
     </div>
   </div>
