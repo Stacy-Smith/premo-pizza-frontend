@@ -12,6 +12,7 @@ import { OrdersAddComponent } from './components/orders/orders-add/orders-add.co
 import { OrdersComponent } from './components/orders/orders.component';
 import { ProductComponent } from './components/product/product.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { ResolverService } from './services/resolver.service';
 
 const routes: Routes = [
   // Customer Routes
@@ -33,11 +34,12 @@ const routes: Routes = [
   { path: 'products', component: ProductComponent },
 
   //Reports routes
-  { path: 'reports', component: ReportsComponent }
+  { path: 'reports', component: ReportsComponent, resolve: {resolver: ResolverService} }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ResolverService]
 })
 export class AppRoutingModule { }

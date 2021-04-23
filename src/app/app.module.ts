@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { MatTableModule } from '@angular/material/table';
+import { NgxChartsModule }from '@swimlane/ngx-charts';
 
 import { ProductComponent } from './components/product/product.component';
 import { CustomerListComponent } from './components/customer/customer-list/customer-list.component';
@@ -46,7 +47,8 @@ import { ReportsComponent } from './components/reports/reports.component';
     ReactiveFormsModule,
     MaterialModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
