@@ -284,4 +284,9 @@ export class OrdersAddComponent implements OnInit {
     total: 0.00
   };
   }
+
+  reload(): void {
+    this.clear();
+    window.location.reload();
+  }
 }
