@@ -80,6 +80,10 @@
               </tbody>
             </table>
           </div>
+          <br>
+          <div class="submit-btn">
+            <button (click)="saveOrder()" class="btn btn-info" style="background-color: green; color: white; margin-left:auto;margin-right:auto;">Submit</button>
+          </div>
         </div>
         <div class="col-md-6 calc-container">
           <div class="calculator" style="background-color: white;">
@@ -119,14 +123,11 @@
             </div>
           </div>        
         </div>
-
-        <div>
-        <button (click)="saveOrder()" class="btn btn-info" style="background-color: green; color: white;">Submit</button>
-      </div>
+        
     </div>
-    <div *ngIf="submitted">
+    <div *ngIf="submitted" class="success">
       <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" routerLink="/orders/add">Add</button>
-      <button class="btn btn-success" routerLink="/orders">All Orders</button>
+      <button class="btn btn-success" routerLink="/orders/add" style="margin-right: 15px;background-color: grey;color: white;">New Order</button>
+      <button class="btn btn-success" routerLink="/orders" style="background-color:rgb(57, 57, 145); color: white;">All Orders</button>
     </div>
   </div>
