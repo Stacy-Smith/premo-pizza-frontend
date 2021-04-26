@@ -1,3 +1,4 @@
+<!-- <div>
 <h2>Details for Order {{order.orderId}}</h2>
 
 <ul>
@@ -27,3 +28,73 @@
     <li>Discount: ${{order.discount | number: '1.2-2'}}</li>
     <li>Total: ${{order.total | number: '1.2-2'}}</li>
 </ul>
+</div> -->
+
+<div>
+<mat-card>
+    <mat-card-title>Details for Order {{order.orderId}}</mat-card-title>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item>Order ID: {{order.orderId}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Customer: {{order.customer.name}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Employee: {{order.employee.name}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Date: {{order.timestamp | date}}</mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>  
+          <br>
+          <!-- <div> -->
+          <table>
+              <thead>
+                  <tr>
+                      <th>Item</th>
+                      <th>Description</th>
+                      <th>Price</th>
+                      <th>Qty.</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let orderProduct of orderProducts">
+                    <td>{{orderProduct.product.item}}</td>
+                    <td>{{orderProduct.product.details}}</td>
+                    <td>${{orderProduct.product.price | number: '1.2-2'}}</td>
+                    <td>{{orderProduct.quantity}}</td>
+                  </tr>
+              </tbody>
+          </table>
+        <!-- </div> -->
+          <br>
+          <mat-list class="total-container">
+            <mat-divider></mat-divider>
+            <mat-list-item class="total-item">Subtotal: ${{order.subtotal | number: '1.2-2'}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="total-item">Discount: ${{order.discount | number: '1.2-2'}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="total-item" style="font-weight: 600;">Total: ${{order.total | number: '1.2-2'}}</mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+    </mat-card-content>
+    <!-- <mat-card-footer>
+        <div style="display: flex;" class="footer">
+            <ul>
+                <li style="float: left;">
+                    Subtotal: ${{order.subtotal | number: '1.2-2'}}
+                </li> 
+                <li style="float: left;">
+                    Discount: ${{order.discount | number: '1.2-2'}}
+                </li> 
+                <li style="float: left;">
+                    Total: ${{order.total | number: '1.2-2'}}
+                </li>
+            </ul>
+        </div>
+       
+    </mat-card-footer> -->
+    <mat-card-actions>
+            <button mat-raised-button style="background-color: grey; color: white;" class="primary" routerLink="/orders">All Orders</button>
+            <button mat-raised-button style="background-color: grey; color: white;" class="primary" routerLink="/employees">All Employees</button>
+    </mat-card-actions>
+</mat-card>
+</div>

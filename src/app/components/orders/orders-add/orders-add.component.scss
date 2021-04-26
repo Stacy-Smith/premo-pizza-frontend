@@ -5,6 +5,7 @@
   padding-right: 20px;
   padding-top: 30px;
   padding-bottom: 35px;
+  margin-bottom: 15px;
 }
 
 a:visited {
@@ -53,8 +54,14 @@ a:visited {
     background-color: #eaeaea;
   }
 
-  .operator {
+  .operator-qty {
     color: #337cac;
+    grid-area: 4 / 1 / 5 / 3;
+  }
+
+  .operator-disc {
+    color: #337cac;
+    grid-area: 4 / 3 / 5 / 5;
   }
 
   .all-clear {
@@ -100,3 +107,25 @@ a:visited {
   .col-md-6.form-container {
     float: right;
     }
+
+  .product-details {
+    width: 100%;
+    border: 1px solid white;
+    border-collapse: collapse;
+  }
+
+  th, td{
+    border: 1px solid white;
+    text-align: center;
+  }
+
+.submit-btn {
+  margin: auto;
+  width: 25%;
+}
+
+.orders-add-component.success {
+  margin: auto;
+  width: 50%;
+}
+  

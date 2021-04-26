@@ -76,4 +76,17 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
+  deleteEmployee(): void {
+    this.employeeService.delete(this.currentEmployee.id)
+      .subscribe(
+        response => {
+          console.log(response);
+          window.location.reload();
+        },
+        error => {
+          window.alert("Cannot delete employee! Record needed for tax purposes.")
+          console.log(error);
+        });
+  }
+
 }

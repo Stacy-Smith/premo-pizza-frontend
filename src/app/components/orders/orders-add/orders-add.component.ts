@@ -120,10 +120,12 @@ export class OrdersAddComponent implements OnInit {
          // send them together in concat
         forkJoin(multiCreate).subscribe(data => {
           console.log(data);
+          this.submitted = true;
         }, error => {
           console.log(error);
         })
       })
+      
   }
 
   public getProduct(product: Product){
@@ -156,14 +158,32 @@ export class OrdersAddComponent implements OnInit {
 
   public getOperation(op: string){
     console.log(op);
+    let included = false;
     this.firstProduct = this.selectedProduct;
-    if(op == "+" && this.operator == null){
+    if((op == "+" || op == "=") && this.operator == null){
       let orderProduct: OrderProduct = {
         product: this.selectedProduct,
         order: null,
         quantity: 1
       }
       this.orderProducts.push(orderProduct);
+    }
+    if( op == "=" && (this.operator != null) && ((this.operator != "*") && (this.operator != "/"))){
+      this.orderProducts.forEach(orderProduct => {
+        if(orderProduct.product.productId == this.firstProduct.productId){
+          orderProduct.quantity += 1;
+          included = true;
+        }
+      });
+
+    if(!included){
+      let orderProduct: OrderProduct = {
+        product: this.selectedProduct,
+        order: null,
+        quantity: 1
+      }
+      this.orderProducts.push(orderProduct);
+    }
     }
     if(this.firstOperand === null){
       this.firstOperand = Number(this.currentNumber);
@@ -174,6 +194,15 @@ export class OrdersAddComponent implements OnInit {
     }
     this.operator = op;
     this.waitForSecondNumber = true;
+    if (op == "="){
+      this.order.subtotal = 0;
+      this.orderProducts.forEach(orderProduct => {
+        this.order.subtotal += (orderProduct.product.price * orderProduct.quantity);
+      })
+      this.order.total = this.order.subtotal - this.order.discount;
+        console.log(this.order.subtotal);
+        console.log(this.order.total);
+    }
   }
 
   private doCalculation(op , secondOp){
@@ -181,27 +210,14 @@ export class OrdersAddComponent implements OnInit {
     switch (op){
       case '+':
         // check if product is there, if yes += qty 1
-        this.orderProducts.forEach(orderProduct => {
-          if(orderProduct.product.productId == this.firstProduct.productId){
-            orderProduct.quantity += 1;
-            included = true;
-          }
-        });
-
-      if(!included){
-        let orderProduct: OrderProduct = {
-          product: this.selectedProduct,
-          order: null,
-          quantity: 1
-        }
-        this.orderProducts.push(orderProduct);
-      }
+        
       // check if product is there, if yes += qty
       console.log(`First Product: ${JSON.stringify(this.firstProduct)}`);
       console.log(`Order Products Array: ${JSON.stringify(this.orderProducts)}`);
         return this.firstOperand += secondOp; 
       case '-': 
       // remove item
+      
       return this.firstOperand -= secondOp; 
       case '*': 
       // check if product is there, if yes += qty
@@ -223,14 +239,13 @@ export class OrdersAddComponent implements OnInit {
         console.log(`First Product: ${JSON.stringify(this.firstProduct)}`);
         console.log(`Order Products Array: ${JSON.stringify(this.orderProducts)}`);
         this.productMult = this.selectedProduct.price * secondOp;
-      return this.currentNumber; 
+      return this.productMult; 
       case '/': 
       //discount
-      return this.firstOperand /= secondOp; 
+      this.order.discount = secondOp;
+      return this.firstOperand; 
       case '=':
-        //update totals
-        console.log(`First Product: ${JSON.stringify(this.firstProduct)}`);
-        console.log(`Order Products Array: ${JSON.stringify(this.orderProducts)}`);
+
       return secondOp;
     }
     //update total

@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatPaginator } from '@angular/material/paginator';
@@ -22,7 +22,7 @@ export interface Order {
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnInit, AfterViewInit {
+export class OrdersComponent implements OnInit {
 
   displayedColumns: string[] = ['orderId', 'customer', 'employee', 'date', 'zipCode', 'subtotal', 'discount', 'total']
   orders: Order [] = [];
@@ -50,50 +50,16 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   retrieveOrders(): void {
     this.orderService.getAll()
       .subscribe(data => {
-        console.log(data);
         this.orders = data;
         this.orders.forEach(order => {
-          console.log(order);
           this.ordersTotal += order.total;
+          console.log(this.ordersTotal)
         })
         this.dataSource = new MatTableDataSource<Order>(this.orders);
       },
       error => {
         console.log(error);
       });
-  }
-
-  ngAfterViewInit() {
-    let temp = [];
-    this.ordersTotal = 0;
-
-    if(this.zipCode) {
-      this.ordersTotal = 0;
-      this.orders.forEach(order => {
-        if (order.customer['zipCode'] == this.zipCode)  {
-          temp.push(order);
-          this.ordersTotal += order.total;
-        }
-      })
-    }
-    else {
-      temp = this.orders;
-    }
-    let tempDate = [];
-    if (this.startDate && this.endDate) {
-      this.ordersTotal = 0;
-      temp.forEach(order => {
-        if (new Date(order.timestamp) >= this.startDate && new Date(order.timestamp) <= this.endDate) {
-          tempDate.push(order);
-          this.ordersTotal += order.total;
-        }
-      })
-    }
-    else {
-      tempDate = temp;
-    }
-    this.dataSource = new MatTableDataSource<Order>(tempDate);
-    this.dataSource.paginator = this.paginator;
   }
 
   saveStartDate(event: MatDatepickerInputEvent<Date>) {

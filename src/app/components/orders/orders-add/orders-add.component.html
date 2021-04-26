@@ -60,6 +60,30 @@
               name="total"
             />
           </div>
+          <div>
+            <table class="product-details">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Qty.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let orderProduct of orderProducts">
+                  <td>{{orderProduct.product.item}}</td>
+                  <td>{{orderProduct.product.details}}</td>
+                  <td>${{orderProduct.product.price | number: '1.2-2'}}</td>
+                  <td>{{orderProduct.quantity}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+          <div class="submit-btn">
+            <button (click)="saveOrder()" class="btn btn-info" style="background-color: green; color: white; margin-left:auto;margin-right:auto;">Submit</button>
+          </div>
         </div>
         <div class="col-md-6 calc-container">
           <div class="calculator" style="background-color: white;">
@@ -74,24 +98,10 @@
               <button type="button" routerLink="/orders"  class="admin" value="edit-order">All Orders</button>
 
               <button *ngFor="let product of products" type="button" (click) = "getProduct(product)" class="product" value="product.price">{{product.item}}</button>
-          
-              <!-- <button type="button" (click) = "getNumber('7.35')" class="product" value="7.35">Pizza (S) Pepperoni</button>
-              <button type="button" (click) = "getNumber('9.35')" class="product" value="9.35">Pizza (M) Pepperoni</button>
-              <button type="button" (click) = "getNumber('14.00')" class="product" value="14.00">Pizza (L) Pepperoni</button>
-              <button type="button" (click) = "getNumber('3.25')" class="product" value="3.25">Soda</button>
         
-          
-              <button type="button" (click) = "getNumber('8.50')" class="product" value="8.50">Pizza (S) House Special</button>
-              <button type="button" (click) = "getNumber('10.50')" class="product" value="10.50">Pizza (M) House Special</button>
-              <button type="button" (click) = "getNumber('16.00')" class="product" value="16.00">Pizza (L) House Special</button>
-              <button type="button" (click) = "getNumber('2.50')" class="product" value="2.50">Breadsticks</button> -->
-        
-          
-              <button type="button" (click) = "getOperation('+')" class="operator" value="+">+</button>
-              <button type="button" (click) = "getOperation('-')" class="operator" value="-">-</button>
-              <button type="button" (click) = "getOperation('*')" class="operator" value="*">&times;</button>
-              <button type="button" (click) = "getOperation('/')" class="operator" value="/">&divide;</button>
-          
+              <button type="button" (click) = "getOperation('*')" class="operator-qty" value="*">Qty</button>
+              <button type="button" (click) = "getOperation('/')" class="operator-disc" value="/">Disc</button>
+              
               <button type="button" (click) = "getNumber('7')" value="7">7</button>
               <button type="button" (click) = "getNumber('8')" value="8">8</button>
               <button type="button" (click) = "getNumber('9')" value="9">9</button>
@@ -108,20 +118,16 @@
               <button type="button" (click) = "getDecimal()" class="decimal" value=".">.</button>
               <button type="button" (click) = "clear()"  class="all-clear" value="all-clear">AC</button>
           
-              <button type="button" (click) = "getOperation('=')" class="equal-sign" value="=">=</button>
+              <button type="button" (click) = "getOperation('=')" class="equal-sign" value="=">Enter</button>
           
             </div>
           </div>        
         </div>
-
-        <div>
-        <button (click)="saveOrder()" class="btn btn-info">Submit</button>
-      </div>
-  
-      <div *ngIf="submitted">
-        <h4>You submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newOrder()">Add</button>
-        <button class="btn btn-success" routerLink="/orders">All Orders</button>
-      </div>
+        
+    </div>
+    <div *ngIf="submitted" class="success">
+      <h4>You submitted successfully!</h4>
+      <button class="btn btn-success" routerLink="/orders/add" style="margin-right: 15px;background-color: grey;color: white;">New Order</button>
+      <button class="btn btn-success" routerLink="/orders" style="background-color:rgb(57, 57, 145); color: white;">All Orders</button>
     </div>
   </div>
