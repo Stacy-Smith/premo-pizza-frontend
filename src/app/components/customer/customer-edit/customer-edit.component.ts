@@ -42,16 +42,4 @@ export class CustomerEditComponent implements OnInit {
       });
   }
 
-  deleteCustomer(): void {
-    this.customerService.delete(this.currentCustomer.id)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.router.navigate(['/customers']);
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
 }
