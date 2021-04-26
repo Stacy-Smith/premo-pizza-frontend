@@ -1,4 +1,5 @@
-<h2>Sales Reports</h2>
+<div>
+<h1>Sales Reports</h1>
 
 <!-- 
 By Employee YTD
@@ -16,12 +17,12 @@ By Product -->
     [chartType]="barChartType">
   </canvas>
 </div> -->
-
+<h3 style="text-align: center;">YTD Sales by Employee</h3>
 <ngx-charts-bar-vertical 
     [view]="[1200,500]"
     [results]="employeeSalesData"
     [xAxisLabel]="'Employees'"
-    [legendTitle]="'YTD Sales by Employee'"
+    [legendTitle]="'Legend'"
     [legendPosition]="'below'"
     [yAxisLabel]="'Sales'"
     [legend]="true"
@@ -29,14 +30,15 @@ By Product -->
     [showYAxisLabel]="true"
     [xAxis]="true"
     [yAxis]="true"
-    [gradient]="true">
+    [gradient]="true"
+    style="fill: #FFFFFF">
 </ngx-charts-bar-vertical>
-
+<h3 style="text-align: center;">YTD Sales by Zipcode</h3>
 <ngx-charts-bar-vertical 
     [view]="[1200,500]"
     [results]="zipcodeSalesData"
     [xAxisLabel]="'Zip Code'"
-    [legendTitle]="'YTD Sales by Zipcode'"
+    [legendTitle]="'Legend'"
     [legendPosition]="'below'"
     [yAxisLabel]="'Sales'"
     [legend]="true"
@@ -44,14 +46,15 @@ By Product -->
     [showYAxisLabel]="true"
     [xAxis]="true"
     [yAxis]="true"
-    [gradient]="true">
+    [gradient]="true"
+    style="fill: #FFFFFF">
 </ngx-charts-bar-vertical>
-
+<h3 style="text-align: center;">YTD Sales by Month</h3>
 <ngx-charts-bar-vertical 
     [view]="[1200,500]"
     [results]="monthlySalesData"
     [xAxisLabel]="'Month'"
-    [legendTitle]="'YTD Sales by Month'"
+    [legendTitle]="'Legend'"
     [legendPosition]="'below'"
     [yAxisLabel]="'Sales'"
     [legend]="true"
@@ -59,5 +62,7 @@ By Product -->
     [showYAxisLabel]="true"
     [xAxis]="true"
     [yAxis]="true"
-    [gradient]="true">
+    [gradient]="true"
+    style="fill: #FFFFFF">
 </ngx-charts-bar-vertical>
+</div>
