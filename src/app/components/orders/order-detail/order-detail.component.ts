@@ -31,6 +31,7 @@ export class OrderDetailComponent implements OnInit {
           if(this.order.orderId == orderProd.order.orderId){
             this.orderProducts.push(orderProd);
           }
+          console.log(this.orderProducts);
         });
       }, error => {
         console.log(error);

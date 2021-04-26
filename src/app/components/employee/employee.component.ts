@@ -84,6 +84,7 @@ export class EmployeeComponent implements OnInit {
           window.location.reload();
         },
         error => {
+          window.alert("Cannot delete employee! Record needed for tax purposes.")
           console.log(error);
         });
   }
