@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { concat, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { Customer } from 'src/app/models/customer';
 import { Employee } from 'src/app/models/employee';
 import { OrderProduct } from 'src/app/models/orderproduct';
@@ -283,5 +283,10 @@ export class OrdersAddComponent implements OnInit {
     discount: 0.00,
     total: 0.00
   };
+  }
+
+  reload(): void {
+    this.clear();
+    window.location.reload();
   }
 }
