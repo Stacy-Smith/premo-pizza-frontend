@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 import { OrderProduct } from 'src/app/models/orderproduct';
 import { Order } from 'src/app/models/orders';
 import { OrderproductService } from 'src/app/services/orderproduct.service';
@@ -17,7 +18,8 @@ export class OrderDetailComponent implements OnInit {
 
   constructor(private orderService: OrderService,
               private orderProductService: OrderproductService, 
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getOrder(this.route.snapshot.paramMap.get('id'));
@@ -47,5 +49,33 @@ export class OrderDetailComponent implements OnInit {
         console.log(error);
       });
   }
-
+  deleteOrder(): void {
+    let mult = [];
+    if (this.orderProducts.length > 0) {
+      this.orderProducts.forEach(orderProduct => {
+        mult.push(this.orderProductService.delete(orderProduct.orderProductId))
+      })
+      forkJoin(mult).subscribe(data =>{
+        this.orderService.delete(this.order.orderId)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.router.navigate(['/orders'])
+      })
+          },
+          error => {
+            console.log(error);
+          });
+    } else {
+      this.orderService.delete(this.order.orderId)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.router.navigate(['/orders'])
+      },
+      error => {
+        console.log(error);
+      });
+    } 
+  }
 }
