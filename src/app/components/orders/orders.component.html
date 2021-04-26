@@ -9,16 +9,26 @@
         <br>
         <h4>Filter Orders</h4>
         <form>
-            <div class="zip-container">
+            <div class="employee-container">
             <mat-form-field appearance="fill">
-                <mat-label>Filter By Zip</mat-label>
-                <mat-select (selectionChange)="saveZipCode($event)" [value]="zipCode">
-                    <mat-option *ngFor="let zip of zips" [value]="zip">
-                        {{zip}}
+                <mat-label>Filter By Employee</mat-label>
+                <mat-select (selectionChange)="saveEmployee($event)" [value]="selectedEmployee">
+                    <mat-option *ngFor="let employee of employees" [value]="employee">
+                        {{employee.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             </div>
+            <div class="zip-container">
+                <mat-form-field appearance="fill">
+                    <mat-label>Filter By Zip</mat-label>
+                    <mat-select (selectionChange)="saveZipCode($event)" [value]="zipCode">
+                        <mat-option *ngFor="let zip of zips" [value]="zip">
+                            {{zip}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
         <div class="date-container">
         <mat-form-field appearance="fill">
             <mat-label>Enter a date range</mat-label>

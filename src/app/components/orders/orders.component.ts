@@ -5,6 +5,8 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { MatTableDataSource } from '@angular/material/table';
+import { Employee } from 'src/app/models/employee';
+import { EmployeeService } from 'src/app/services/employee.service';
 import { OrderService } from 'src/app/services/orders.service';
 
 export interface Order {
@@ -28,6 +30,8 @@ export class OrdersComponent implements OnInit {
   orders: Order [] = [];
   ordersTotal = 0;
   dataSource: MatTableDataSource<Order>;
+  employees: Employee[] = [];
+  selectedEmployee = null;
   pipe: DatePipe;
   zips = [55501, 55502, 55503, 55504]
   startDate: Date = null;
@@ -39,27 +43,39 @@ export class OrdersComponent implements OnInit {
     toDate: new FormControl(),
   });
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private employeeService: EmployeeService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.retrieveOrders();
+    this.retrieveEmployees();
+    this.clearFilter();
   }
 
   retrieveOrders(): void {
     this.orderService.getAll()
       .subscribe(data => {
         this.orders = data;
+        console.log(this.orders);
         this.orders.forEach(order => {
           this.ordersTotal += order.total;
-          console.log(this.ordersTotal)
         })
         this.dataSource = new MatTableDataSource<Order>(this.orders);
+        this.dataSource.paginator = this.paginator;
       },
       error => {
         console.log(error);
       });
+  }
+
+  retrieveEmployees(): void {
+    this.employeeService.getAll()
+      .subscribe( data => {
+        this.employees = data;
+      }, error => {
+        console.log(error);
+      })
   }
 
   saveStartDate(event: MatDatepickerInputEvent<Date>) {
@@ -76,20 +92,36 @@ export class OrdersComponent implements OnInit {
     this.zipCode = event.value;
   }
 
-  applyFilter() {
-    let temp = [];
-    this.ordersTotal = 0;
+  saveEmployee(event: MatSelectChange) {
+    this.selectedEmployee = event.value;
+  }
 
+  applyFilter() {
+    this.ordersTotal = 0;
+    let tempEmp = [];
+    if(this.selectedEmployee){
+      this.ordersTotal = 0;
+      this.orders.forEach( order => {
+        if(order.employee['id'] == this.selectedEmployee.id){
+          tempEmp.push(order);
+          this.ordersTotal += order.total;
+        }
+      })
+    } else {
+      tempEmp = this.orders;
+    }
+
+    let temp = [];
     if (this.zipCode) {
       this.ordersTotal = 0;
-      this.orders.forEach(order => {
+      tempEmp.forEach(order => {
         if (order.customer['zipCode'] == this.zipCode) {
           temp.push(order);
           this.ordersTotal += order.total;
         }
       })
     } else {
-      temp = this.orders;
+      temp = tempEmp;
     }
     let tempDate = [];
     if (this.startDate && this.endDate){
@@ -112,6 +144,7 @@ export class OrdersComponent implements OnInit {
     this.startDate = null;
     this.endDate = null;
     this.zipCode = null;
+    this.selectedEmployee = null;
     this.orders.forEach(order => {
       this.ordersTotal += order.total;
     })
