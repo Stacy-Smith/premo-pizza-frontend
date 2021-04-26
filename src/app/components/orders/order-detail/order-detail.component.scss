@@ -12,3 +12,40 @@ div {
 table {
     width: 100%;
 }
+
+th, td{
+    border: 1px solid black;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+// mat-card {
+//     width: 50%;
+//     margin: auto;
+// }
+
+.footer {
+    background-color: white;
+    color: black;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    width: 100%;
+    margin: auto;
+}
+
+li {
+    margin: 20px;
+    text-decoration: none;
+}
+
+.total-container {
+    margin-left: 70%;
+}
+
+.total-item {
+    font-size: 15px;
+    // font-weight: 550;
+}
