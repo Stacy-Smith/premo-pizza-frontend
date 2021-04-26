@@ -64,16 +64,5 @@ export class EmployeeUpdateComponent implements OnInit {
         console.log(error);
       });
   }
-  
-  deleteEmployee(): void {
-    this.employeeService.delete(this.currentEmployee.id)
-      .subscribe(response => {
-        console.log(response);
-        this.router.navigate(['/employees']);
-      },
-      error => {
-        console.log(error);
-      });
-  }
 
 }
