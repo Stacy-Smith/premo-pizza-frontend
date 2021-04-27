@@ -99,8 +99,8 @@
 
               <button *ngFor="let product of products" type="button" (click) = "getProduct(product)" class="product" value="product.price">{{product.item}}</button>
         
-              <button type="button" (click) = "getOperation('*')" class="operator-qty" value="*">Qty</button>
-              <button type="button" (click) = "getOperation('/')" class="operator-disc" value="/">Disc</button>
+              <button type="button" (click) = "getOperation('*')" class="operator-qty" value="*">X</button>
+              <button type="button" (click) = "getOperation('/')" class="operator-disc" value="/">Discount</button>
               
               <button type="button" (click) = "getNumber('7')" value="7">7</button>
               <button type="button" (click) = "getNumber('8')" value="8">8</button>
@@ -126,8 +126,7 @@
     </div>
     <div *ngIf="submitted" class="success">
       <h4>You submitted successfully!</h4>
-      <br>
-      <button class="btn btn-success" (click)="reload()" style="margin-right: 15px;background-color: grey;color: white;">New Order</button>
-      <button class="btn btn-success" routerLink="/orders" style="background-color:rgb(57, 57, 145); color: white;">All Orders</button>
+      <button class="btn btn-success" (click)="reload()" style="margin-right: 15px;background-color: grey;color: white; font-size: medium;">New Order</button>
+      <button class="btn btn-success" routerLink="/orders" style="background-color:rgb(57, 57, 145); color: white;font-size: medium;">All Orders</button>
     </div>
   </div>
