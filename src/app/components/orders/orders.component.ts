@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -46,11 +47,13 @@ export class OrdersComponent implements OnInit {
   constructor(private orderService: OrderService, private employeeService: EmployeeService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {
     this.retrieveOrders();
     this.retrieveEmployees();
     this.clearFilter();
+    console.log(this.dataSource);
   }
 
   retrieveOrders(): void {
@@ -63,6 +66,8 @@ export class OrdersComponent implements OnInit {
         })
         this.dataSource = new MatTableDataSource<Order>(this.orders);
         this.dataSource.paginator = this.paginator;
+        this.setSortColumns();
+        this.dataSource.sort = this.sort;
       },
       error => {
         console.log(error);
@@ -94,6 +99,18 @@ export class OrdersComponent implements OnInit {
 
   saveEmployee(event: MatSelectChange) {
     this.selectedEmployee = event.value;
+  }
+
+  setSortColumns() {
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'customer': return item.customer["name"];
+        case 'employee': return item.employee["name"];
+        case 'date': return item.timestamp;
+        case 'zipCode': return item.customer["zipCode"];
+        default: return item[property];
+      }
+    }
   }
 
   applyFilter() {
@@ -137,6 +154,8 @@ export class OrdersComponent implements OnInit {
     }
     this.dataSource = new MatTableDataSource<Order>(tempDate);
     this.dataSource.paginator = this.paginator;
+    this.setSortColumns();
+    this.dataSource.sort = this.sort;
 }
 
   clearFilter() {
@@ -150,6 +169,8 @@ export class OrdersComponent implements OnInit {
     })
     this.dataSource = new MatTableDataSource<Order>(this.orders);
     this.dataSource.paginator = this.paginator;
+    this.setSortColumns();
+    this.dataSource.sort = this.sort;
   }
 
 }
